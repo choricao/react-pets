@@ -26,12 +26,15 @@ class PetCollection extends Component {
       })
       .catch( (error) => {
         console.log(error);
+        this.setState({
+          error: error.message,
+        });
       });
 
   }
 
   renderPetList = () => {
-    console.log('Rending Pet List');
+    console.log('Rendering Pet List');
     const componentList = this.state.pets.map((pet, index) => {
       return (
         <Pet
@@ -47,6 +50,14 @@ class PetCollection extends Component {
     return componentList;
   }
 
+  renderError = () => {
+    if (this.state.error) {
+      return (
+        <p>{this.state.error}</p>
+      );
+    }
+  }
+
   addPet = (pet) => {
     const pets = this.state.pets;
 
@@ -59,6 +70,7 @@ class PetCollection extends Component {
   render() {
     return (
       <section>
+        {this.renderError()}
         {this.renderPetList()}
         <NewPetForm addPetCallback={this.addPet} />
       </section>
