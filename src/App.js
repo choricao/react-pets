@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pet from './components/Pet';
 import PetCollection from './components/PetCollection';
+import axios from 'axios';
 import './App.css';
 
 const PET_LIST = [
