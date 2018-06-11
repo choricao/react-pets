@@ -16,7 +16,8 @@ class NewPetForm extends Component {
 
   onFieldChange = (event) => {
     const fieldName = event.target.name;
-    const fieldValue = event.target.value;
+    const fieldValue =
+      fieldName === 'age' ? parseInt(event.target.value) : event.target.value;
     const updateState = {};
     updateState[fieldName] = fieldValue;
     this.setState(updateState);
@@ -39,7 +40,8 @@ class NewPetForm extends Component {
     event.preventDefault();
 
     if (this.valid()) {
-      //TODO: Add pet
+      this.props.addPetCallback(this.state);
+
       this.clearForm();
     }
   }
@@ -83,6 +85,10 @@ class NewPetForm extends Component {
     );
   }
 
+}
+
+NewPetForm.propTypes = {
+  addPetCallback: PropTypes.func.isRequired,
 }
 
 export default NewPetForm;

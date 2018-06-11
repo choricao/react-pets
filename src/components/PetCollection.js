@@ -5,8 +5,16 @@ import NewPetForm from './NewPetForm';
 
 class PetCollection extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      petList: props.petList,
+    }
+  }
+
   renderPetList = () => {
-    const componentList = this.props.petList.map((pet, index) => {
+    const componentList = this.state.petList.map((pet, index) => {
       return (
         <Pet
           key={index}
@@ -21,11 +29,20 @@ class PetCollection extends Component {
     return componentList;
   }
 
+  addPet = (pet) => {
+    const petList = this.state.petList;
+
+    petList.push(pet);
+    this.setState({
+      petList,
+    });
+  }
+
   render() {
     return (
       <section>
         {this.renderPetList()}
-        <NewPetForm />
+        <NewPetForm addPetCallback={this.addPet} />
       </section>
     );
   }
