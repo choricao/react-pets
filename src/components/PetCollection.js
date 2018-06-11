@@ -9,12 +9,12 @@ class PetCollection extends Component {
     super(props);
 
     this.state = {
-      petList: props.petList,
+      pets: [],
     }
   }
 
   renderPetList = () => {
-    const componentList = this.state.petList.map((pet, index) => {
+    const componentList = this.state.pets.map((pet, index) => {
       return (
         <Pet
           key={index}
@@ -30,11 +30,11 @@ class PetCollection extends Component {
   }
 
   addPet = (pet) => {
-    const petList = this.state.petList;
+    const pets = this.state.pets;
 
-    petList.push(pet);
+    pets.push(pet);
     this.setState({
-      petList,
+      pets,
     });
   }
 
@@ -49,7 +49,6 @@ class PetCollection extends Component {
 }
 
 PetCollection.propTypes = {
-  petList: PropTypes.array.isRequired,
 };
 
 export default PetCollection;
