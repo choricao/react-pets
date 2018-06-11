@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Pet from './Pet';
 import NewPetForm from './NewPetForm';
+import axios from 'axios';
 
 class PetCollection extends Component {
 
@@ -13,7 +14,24 @@ class PetCollection extends Component {
     }
   }
 
+  componentDidMount = () => {
+    console.log('Component did mount was called');
+
+    axios.get('https://petdibs.herokuapp.com/pets')
+      .then( (response) => {
+        console.log(response.data);
+        this.setState({
+          pets: response.data,
+        });
+      })
+      .catch( (error) => {
+        console.log(error);
+      });
+
+  }
+
   renderPetList = () => {
+    console.log('Rending Pet List');
     const componentList = this.state.pets.map((pet, index) => {
       return (
         <Pet
