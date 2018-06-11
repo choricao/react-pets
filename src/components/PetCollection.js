@@ -25,6 +25,7 @@ class PetCollection extends Component {
     return (
       <section>
         {this.renderPetList()}
+        <NewPetForm />
       </section>
     );
   }

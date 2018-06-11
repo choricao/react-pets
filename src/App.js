@@ -28,9 +28,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <PetCollection
-          petList={PET_LIST}
-          />
+        <PetCollection petList={PET_LIST} />
       </div>
     );
   }
