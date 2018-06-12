@@ -69,9 +69,37 @@ describe('NewPetForm', () => {
         value,
       }});
       wrapper.update();
-      
+
       element = wrapper.find(`[name="${field}"]`);
       expect(element.getElement().props.value).toEqual(value);
     });
+  });
+
+  test('NewPetForm can submit', () => {    
+    const wrapper = shallow(<NewPetForm
+      addPetCallback={() => {}}
+      />);
+
+    wrapper.find(`[name="name"]`).simulate('change', {
+      target: {
+        name: 'name',
+        value: 'bob',
+      }
+    });
+    wrapper.find(`[name="age"]`).simulate('change', {
+      target: {
+        name: 'age',
+        value: 5,
+      }
+    });
+    wrapper.update();
+
+    wrapper.find('form').simulate('submit', {
+      preventDefault: () => {},
+    });
+    wrapper.update();
+
+    const nameField = wrapper.find(`[name="name"]`);
+    expect(nameField.getElement().props.value).toEqual('');
   });
 });
