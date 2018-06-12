@@ -6,7 +6,9 @@ describe('NewPetForm', () => {
   test('that it matches an existing snapshot', () => {
     // First Mount the Component in the testing DOM
     // Arrange
-    const wrapper = mount(<NewPetForm />);
+    const wrapper = mount(<NewPetForm
+      addPetCallback={() => {}}
+      />);
 
     // Assert that it looks like the last snapshot
     expect(wrapper).toMatchSnapshot();
@@ -17,7 +19,9 @@ describe('NewPetForm', () => {
 
   test('When a user enters a name in a text field the field is updated', () => {
     // Arrange
-    const wrapper = shallow(<NewPetForm />);
+    const wrapper = shallow(<NewPetForm
+      addPetCallback={() => {}}
+      />);
     let nameField = wrapper.find('input[name="name"]');
 
     // Act
