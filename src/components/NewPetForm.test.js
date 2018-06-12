@@ -38,4 +38,40 @@ describe('NewPetForm', () => {
     // Assert
     expect(nameField.getElement().props.value).toEqual('Bob');
   });
+
+  test('when the user types on a field the value changes', () => {
+    const wrapper = shallow( <NewPetForm addPetCallback={() => {}} />);
+
+    const fieldValues = [
+      {
+        field: 'name',
+        value: 'Bob',
+      },
+      {
+        field:  'breed',
+        value: 'Pomeranian',
+      },
+      {
+        field: 'age',
+        value: 6,
+      },
+      {
+        field: 'about',
+        value: 'fun breed',
+      }
+    ];
+
+    fieldValues.forEach(({field, value}) => {
+      let element = wrapper.find(`[name="${field}"]`);
+
+      element.simulate('change', {target: {
+        name: field,
+        value,
+      }});
+      wrapper.update();
+      
+      element = wrapper.find(`[name="${field}"]`);
+      expect(element.getElement().props.value).toEqual(value);
+    });
+  });
 });
