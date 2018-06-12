@@ -1,6 +1,6 @@
 import React from 'react';
 import NewPetForm from './NewPetForm';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 describe('NewPetForm', () => {
   test('that it matches an existing snapshot', () => {
@@ -13,5 +13,25 @@ describe('NewPetForm', () => {
 
     // Remove the component from the DOM (save memory and prevent side effects).
     wrapper.unmount();
+  });
+
+  test('When a user enters a name in a text field the field is updated', () => {
+    // Arrange
+    const wrapper = shallow(<NewPetForm />);
+    let nameField = wrapper.find('input[name="name"]');
+
+    // Act
+    nameField.simulate('change', {
+      target: {
+        name: 'name',
+        value: 'Bob',
+      }
+    });
+    // Force the onChange event
+    wrapper.update();
+    nameField = wrapper.find('input[name="name"]');
+
+    // Assert
+    expect(nameField.getElement().props.value).toEqual('Bob');
   });
 });
